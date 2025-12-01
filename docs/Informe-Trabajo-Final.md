@@ -85,26 +85,43 @@ Define la sintaxis para representar recetas con los siguientes elementos princip
 
 ### **Componentes principales de la gramática**
 
-- **recipe** → unidad principal que contiene ingredientes y pasos.  
-- **ingredientDecl** → declaración de ingredientes con cantidades, unidades y costo.  
-- **stepDecl** → define pasos con tiempos de ejecución, dependencias y acciones.  
-- **unit** → unidades de medida como gramos, kilogramos, mililitros, litros y unidades.  
-- **numericExpr** → expresiones numéricas para costos y cantidades.  
-- **dependencyExpr** → dependencias entre pasos.  
-- **parallelBlock** → ejecución de pasos en paralelo.
-
+- **recipeStmt** — Unidad principal 
+- **rindeDecl** → declaración de ingredientes con cantidades, unidades y costo. 
+- **tiempoPrepDecl** → Tiempo de preparación
+- **tiempoCoccDecl** → Tiempo de cocción
+- **tagsDecl** → Etiquetas
+- **ingredientesBlock** → Lista de ingredientes
+- **pasosBlock** → Lista de pasos
+- **nutricionBlock**  → Información nutricional
+ 
 ### **Ejemplo representativo de sintaxis permitida**
 
-```recipe
-ingredient arroz = 200 g cost 3.5;
-ingredient aceite = 20 ml cost 1.0;
+```recipeLang
+receta "Arroz con pollo" {
+    rinde 4 porciones
+    tiempo_preparacion 20 minutos
+    tiempo_coccion 35 minutos
 
-step 1: hervir(agua) time 10;
-step 2: mezclar(arroz, aceite) depends on 1 time 5;
+    tags: ["peruano", "casero"]
 
-parallel {
-    step 3: picar(verduras) time 4;
-    step 4: preparar(caldo) time 6;
+    ingredientes {
+        ingrediente arroz cantidad 200g costo 3.5 calorias 250
+        ingrediente pollo cantidad 500g costo 8.0 calorias 600
+        ingrediente aceite cantidad 20ml costo 1.0 calorias 180
+    }
+
+    pasos {
+        paso 1 descripcion "Hervir el agua"
+        paso 2 descripcion "Cocinar el arroz" usa arroz depende_de 1
+        paso 3 descripcion "Freír el pollo" usa pollo, aceite
+    }
+
+    nutricion {
+        total_costo
+        total_calorias
+    }
+}
+
 }
 ```
 
@@ -112,11 +129,13 @@ parallel {
 
 Durante el desarrollo del compilador se actualizaron y extendieron varias reglas de la gramática con el fin de soportar funcionalidades adicionales y mejorar la claridad del lenguaje. Las mejoras más importantes fueron:
 
-- Inclusión de bloques `parallel { ... }` para permitir pasos ejecutados en paralelo.
-- Validaciones de dependencias entre pasos, asegurando que ninguna referencia apunte a pasos inexistentes.
-- Reglas más estricticas para unidades (`g`, `kg`, `ml`, `l`, `u`).
-- Posibilidad de anidar cálculos dentro de expresiones numéricas.
-- Manejo semántico para calcular tiempos y costos.
+✔ Nueva estructura
+- Palabra clave receta como bloque raíz
+- Metadatos detallados: rinde, tiempo de preparación, cocción
+- Ingredientes con: cantidad, costo y calorías
+- Pasos más semánticos: descripción, ingredientes usados, dependencias
+- Sistema de tags estilo catálogo
+- Sección nutricional automática
 
 Estas mejoras permiten modelar recetas de mayor complejidad y garantizan un análisis semántico consistente en el backend.
 
