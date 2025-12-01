@@ -1,0 +1,24 @@
+receta "Pasta Alfredo" {
+    rinde 3 porciones
+    tiempo_preparacion 15 minutos
+    tiempo_coccion 12 minutos
+
+    tags: [almuerzo, italiana, cremosa]
+
+    ingredientes {
+        ingrediente pasta cantidad 250g costo 1.2 calorias 900
+        ingrediente crema cantidad 150ml costo 1.5 calorias 600
+        ingrediente queso cantidad 100g costo 2.0 calorias 400
+    }
+
+    pasos {
+        paso 1 descripcion "Hervir la pasta" 
+        paso 2 descripcion "Preparar la salsa" usa crema, queso
+        paso 3 descripcion "Mezclar todo" usa pasta depende_de 1, 2
+    }
+
+    nutricion {
+        total_costo
+        total_calorias
+    }
+}

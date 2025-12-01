@@ -3,8 +3,8 @@
 #include <string>
 
 #include "antlr4-runtime.h"
-#include "RecipesLexer.h"
-#include "RecipesParser.h"
+#include "RecipeLangLexer.h"
+#include "RecipeLangParser.h"
 #include "RecipesVisitorImpl.h"
 
 using namespace antlr4;
@@ -25,30 +25,16 @@ int main(int argc, const char* argv[]) {
         return 1;
     }
 
-    // 1. Crear input ANTLR desde archivo
     ANTLRInputStream input(stream);
-
-    // 2. Lexer
-    RecipesLexer lexer(&input);
+    RecipeLangLexer lexer(&input);
     CommonTokenStream tokens(&lexer);
 
-    // 3. Parser
-    RecipesParser parser(&tokens);
+    RecipeLangParser parser(&tokens);
     tree::ParseTree *tree = parser.program();
 
-    // 4. Visitor 
+    // Aquí el visitor imprime
     RecipesVisitorImpl visitor;
     visitor.visit(tree);
-
-    // 5. Mostrar resultados del visitor
-    cout << "\n===== RESULTADOS DEL COMPILADOR =====\n";
-    cout << "Costo total calculado: " << visitor.totalCost << "\n";
-    cout << "Calorías totales: " << visitor.totalCalories << "\n";
-
-    cout << "Ingredientes registrados: \n";
-    for (auto &p : visitor.ingredients) {
-    cout << "  - " << p.first << " = " << p.second << "\n";
-    }
 
     return 0;
 }

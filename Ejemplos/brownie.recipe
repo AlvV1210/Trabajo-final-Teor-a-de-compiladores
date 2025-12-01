@@ -1,0 +1,25 @@
+receta "Brownie de Chocolate" {
+    rinde 8 porciones
+    tiempo_preparacion 20 minutos
+    tiempo_coccion 25 minutos
+
+    tags: [postre, chocolate, dulce]
+
+    ingredientes {
+        ingrediente chocolate cantidad 200g costo 2.0 calorias 900
+        ingrediente harina cantidad 150g costo 0.5 calorias 500
+        ingrediente azucar cantidad 100g costo 0.3 calorias 400
+        ingrediente mantequilla cantidad 80g costo 0.7 calorias 600
+    }
+
+    pasos {
+        paso 1 descripcion "Derretir mantequilla y chocolate" usa chocolate, mantequilla
+        paso 2 descripcion "Mezclar con harina y azúcar" usa harina, azucar depende_de 1
+        paso 3 descripcion "Hornear" depende_de 2
+    }
+
+    nutricion {
+        total_costo
+        total_calorias
+    }
+}

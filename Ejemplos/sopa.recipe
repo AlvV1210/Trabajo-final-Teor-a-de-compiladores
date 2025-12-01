@@ -1,0 +1,24 @@
+receta "Sopa de Verduras" {
+    rinde 4 porciones
+    tiempo_preparacion 10 minutos
+    tiempo_coccion 20 minutos
+
+    tags: [cena, saludable, ligera]
+
+    ingredientes {
+        ingrediente zanahoria cantidad 100g costo 0.4 calorias 40
+        ingrediente papa cantidad 150g costo 0.5 calorias 120
+        ingrediente apio cantidad 50g costo 0.3 calorias 20
+        ingrediente agua cantidad 500ml costo 0 calorias 0
+    }
+
+    pasos {
+        paso 1 descripcion "Cortar las verduras" usa zanahoria, papa, apio
+        paso 2 descripcion "Hervir todo" usa agua depende_de 1
+    }
+
+    nutricion {
+        total_costo
+        total_calorias
+    }
+}

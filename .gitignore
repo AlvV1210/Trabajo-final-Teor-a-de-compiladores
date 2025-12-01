@@ -1,0 +1,53 @@
+# ============================
+# C++ BUILD FILES
+# ============================
+*.o
+*.obj
+*.so
+*.a
+*.exe
+*.out
+*.dll
+
+# ============================
+# CMAKE BUILD FOLDERS
+# ============================
+build/
+cmake-build*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# ============================
+# ANTLR4 GENERATED FILES
+# ============================
+*.tokens
+*.interp
+
+# Lexer/Parser generated C++ files
+*Lexer.cpp
+*Parser.cpp
+*BaseListener.cpp
+*BaseVisitor.cpp
+*Listener.cpp
+*Visitor.cpp
+*Lexer.h
+*Parser.h
+*BaseListener.h
+*BaseVisitor.h
+*Listener.h
+*Visitor.h
+
+# ============================
+# EDITOR / OS JUNK
+# ============================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ============================
+# BINARY OUTPUT
+# ============================
+compilador
